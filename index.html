@@ -230,7 +230,7 @@
 
         function playCrackle() {
           var ac = audioCtx;
-          if (!ac || ac.state !== "running") return;
+          if (!ac) return;
           var dur = 0.03 + Math.random() * 0.06;
           var len = Math.max(1, Math.floor(ac.sampleRate * dur));
           var buf = ac.createBuffer(1, len, ac.sampleRate);
@@ -725,13 +725,32 @@
               smolder = 0;
               for (var j = 0; j < 6; j++) spawnEmber();
               playIgniteBurst();
-              startFireSound();
+              // Ses context'inin açılmasını bekle, sonra ateş sesini başlat
+              var ac = ensureAudio();
+              if (ac && ac.state !== "running") {
+                ac.resume().then(function () {
+                  startFireSound();
+                }).catch(function () {
+                  startFireSound();
+                });
+              } else {
+                startFireSound();
+              }
             }
           } else if (!isLit) {
             isLit = true; smolder = 0;
             for (var k2 = 0; k2 < 6; k2++) spawnEmber();
             playIgniteBurst();
-            startFireSound();
+            var ac2 = ensureAudio();
+            if (ac2 && ac2.state !== "running") {
+              ac2.resume().then(function () {
+                startFireSound();
+              }).catch(function () {
+                startFireSound();
+              });
+            } else {
+              startFireSound();
+            }
           }
         }
 
@@ -741,6 +760,10 @@
               e.preventDefault();
               handleTap(e.clientX, e.clientY);
             });
+            // iOS: pointerdown geçerli etkileşim sayılmaz; pointerup'ta context'i resume et
+            canvas.addEventListener("pointerup", function () {
+              ensureAudio();
+            }, { passive: true });
           } else {
             canvas.addEventListener("touchstart", function (e) {
               e.preventDefault();
