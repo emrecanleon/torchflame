@@ -1,0 +1,5 @@
+[build]
+  publish = "."
+  command = ""
+
+# Güvenlik ve cache başlıkları _headers dosyasında tanımlıdır.

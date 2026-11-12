@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="author" content="A. Emre Canaslan" />
+    <title>TorchFlame</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <meta name="description" content="TorchFlame: gerçekçi bir meşale alevi." />
+    <meta name="theme-color" content="#050302" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TorchFlame" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+      html, body {
+        width: 100%; height: 100%; overflow: hidden; background: #050302;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        user-select: none; -webkit-user-select: none;
+      }
+      canvas#game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+
+      /* ---- Ses kontrolü + imza ---- */
+      #soundControl {
+        position: fixed;
+        right: max(14px, env(safe-area-inset-right));
+        bottom: max(14px, env(safe-area-inset-bottom));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        z-index: 10;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+      }
+
+      #soundBtn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.06);
+        color: rgba(255,255,255,0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        transition: background 0.15s ease, color 0.15s ease;
+        padding: 0;
+      }
+      #soundBtn:hover { background: rgba(255,255,255,0.12); }
+      #soundBtn:active { background: rgba(255,255,255,0.18); }
+      #soundBtn[aria-pressed="false"] { color: rgba(255,255,255,0.35); }
+
+      #signature {
+        font: 11px system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: rgba(255,255,255,0.38);
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+
+    <!-- Ses kontrolü + imza -->
+    <div id="soundControl">
+      <button id="soundBtn" type="button" aria-label="Sesi aç/kapat" aria-pressed="true">
+        <svg id="soundOnIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
+        </svg>
+        <svg id="soundOffIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="display:none;">
+          <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3z"/>
+          <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9l5 6M21 9l-5 6"/>
+        </svg>
+      </button>
+      <div id="signature">A. Emre Canaslan</div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var canvas = document.getElementById("game");
+        var ctx = canvas.getContext("2d");
+        var W = 0, H = 0, dpr = 1;
+
+        var MAX_DPR = 2;
+        var TARGET_FPS = 60;
+        var STEP_MS = 1000 / TARGET_FPS;
+
+        var isLit = false;
+        var flameTime = 0;
+
+        // Alev partikülleri
+        var flameParticles = [];
+        var emberParticles = [];
+        var smokeParticles = [];
+
+        // Meşale geometrisi
+        var torchX = 0;
+        var torchTopY = 0;
+        var torchBottomY = 0;
+        var torchW = 0;
+        var torchHeadW = 0;
+        var torchHeadH = 0;
+
+        // Trapez gövde için üst ve alt genişlik ayrı
+        var torchWTop = 0;
+        var torchWBottom = 0;
+        var torchFootW = 0;
+
+        // ---- SES DURUMU ----
+        var soundEnabled = true;
+        var audioCtx = null;
+        var fireNoiseSrc = null;
+        var fireGain = null;
+        var fireFilter = null;
+        var crackleTimer = 0;
+        var crackleActive = false;
+
+        function computeLayout() {
+          torchBottomY = H * 0.90;
+          torchTopY = H * 0.22;
+          var torchH = torchBottomY - torchTopY;
+          torchX = W / 2;
+
+          torchFootW = Math.max(64, Math.min(W * 0.42, torchH * 0.42));
+
+          torchWBottom = torchFootW * 0.58;
+          torchWTop = torchWBottom * 0.42;
+          torchW = torchWBottom;
+
+          torchHeadW = torchFootW * 0.46;
+          torchHeadH = torchHeadW * 0.85;
+        }
+
+        function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+        function rand(a, b) { return a + Math.random() * (b - a); }
+
+        // =====================================================
+        // SES (Web Audio ile sentez — harici dosya yok)
+        // =====================================================
+        function ensureAudio() {
+          if (!soundEnabled) return null;
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return null;
+            try { audioCtx = new AC(); } catch (e) { return null; }
+          }
+          if (audioCtx.state === "suspended") {
+            audioCtx.resume().catch(function () {});
+          }
+          return audioCtx;
+        }
+
+        function buildNoiseBuffer(ac, seconds, brown) {
+          var len = Math.floor(ac.sampleRate * seconds);
+          var buf = ac.createBuffer(1, len, ac.sampleRate);
+          var d = buf.getChannelData(0);
+          var last = 0;
+          for (var i = 0; i < len; i++) {
+            var w = Math.random() * 2 - 1;
+            if (brown) {
+              last = (last + 0.02 * w) / 1.02;
+              d[i] = last * 3.5;
+            } else {
+              d[i] = w;
+            }
+          }
+          return buf;
+        }
+
+        function startFireSound() {
+          if (!soundEnabled) return;
+          var ac = ensureAudio();
+          if (!ac) return;
+          if (fireNoiseSrc) return; // zaten çalışıyor
+
+          var src = ac.createBufferSource();
+          src.buffer = buildNoiseBuffer(ac, 2.0, true);
+          src.loop = true;
+
+          var lp = ac.createBiquadFilter();
+          lp.type = "lowpass";
+          lp.frequency.value = 820;
+          lp.Q.value = 0.7;
+
+          var hp = ac.createBiquadFilter();
+          hp.type = "highpass";
+          hp.frequency.value = 90;
+
+          var g = ac.createGain();
+          g.gain.setValueAtTime(0.0001, ac.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.16, ac.currentTime + 0.5);
+
+          src.connect(hp);
+          hp.connect(lp);
+          lp.connect(g);
+          g.connect(ac.destination);
+          src.start();
+
+          fireNoiseSrc = src;
+          fireGain = g;
+          fireFilter = lp;
+
+          // Crackle döngüsü
+          crackleActive = true;
+          scheduleCrackle();
+        }
+
+        function scheduleCrackle() {
+          if (!crackleActive) return;
+          var delay = 0.06 + Math.random() * 0.22;
+          crackleTimer = setTimeout(function () {
+            if (!crackleActive || !soundEnabled) return;
+            playCrackle();
+            scheduleCrackle();
+          }, delay * 1000);
+        }
+
+        function playCrackle() {
+          var ac = audioCtx;
+          if (!ac || ac.state !== "running") return;
+          var dur = 0.03 + Math.random() * 0.06;
+          var len = Math.max(1, Math.floor(ac.sampleRate * dur));
+          var buf = ac.createBuffer(1, len, ac.sampleRate);
+          var d = buf.getChannelData(0);
+          for (var i = 0; i < len; i++) {
+            var env = Math.pow(1 - i / len, 3);
+            d[i] = (Math.random() * 2 - 1) * env;
+          }
+          var src = ac.createBufferSource();
+          src.buffer = buf;
+          var bp = ac.createBiquadFilter();
+          bp.type = "bandpass";
+          bp.frequency.value = 1400 + Math.random() * 1800;
+          bp.Q.value = 1.1;
+          var g = ac.createGain();
+          g.gain.value = 0.04 + Math.random() * 0.06;
+          src.connect(bp);
+          bp.connect(g);
+          g.connect(ac.destination);
+          src.start();
+          src.stop(ac.currentTime + dur + 0.02);
+        }
+
+        function playIgniteBurst() {
+          if (!soundEnabled) return;
+          var ac = ensureAudio();
+          if (!ac) return;
+          var dur = 0.5;
+          var len = Math.floor(ac.sampleRate * dur);
+          var buf = ac.createBuffer(1, len, ac.sampleRate);
+          var d = buf.getChannelData(0);
+          var last = 0;
+          for (var i = 0; i < len; i++) {
+            var w = Math.random() * 2 - 1;
+            last = (last + 0.03 * w) / 1.03;
+            var env = Math.exp(-i / (ac.sampleRate * 0.15));
+            d[i] = last * 4.0 * env;
+          }
+          var src = ac.createBufferSource();
+          src.buffer = buf;
+          var lp = ac.createBiquadFilter();
+          lp.type = "lowpass";
+          lp.frequency.setValueAtTime(2600, ac.currentTime);
+          lp.frequency.exponentialRampToValueAtTime(400, ac.currentTime + dur);
+          var g = ac.createGain();
+          g.gain.setValueAtTime(0.0001, ac.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.22, ac.currentTime + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+          src.connect(lp);
+          lp.connect(g);
+          g.connect(ac.destination);
+          src.start();
+        }
+
+        function stopFireSound(fade) {
+          crackleActive = false;
+          if (crackleTimer) { clearTimeout(crackleTimer); crackleTimer = 0; }
+          if (fireNoiseSrc && audioCtx) {
+            var ac = audioCtx;
+            var src = fireNoiseSrc;
+            var g = fireGain;
+            if (g) {
+              g.gain.cancelScheduledValues(ac.currentTime);
+              g.gain.setValueAtTime(Math.max(0.0001, g.gain.value), ac.currentTime);
+              g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + (fade || 0.6));
+            }
+            setTimeout(function () {
+              try { src.stop(); } catch (e) {}
+            }, (fade || 0.6) * 1000 + 80);
+          }
+          fireNoiseSrc = null;
+          fireGain = null;
+          fireFilter = null;
+        }
+
+        // =====================================================
+        // ALEV ALANI KONTROLÜ
+        // =====================================================
+        function isInFlameArea(x, y) {
+          var flameAreaTop = 0;
+          var flameAreaBottom = torchTopY + torchHeadH * 0.3;
+          var flameAreaLeft = torchX - Math.max(torchHeadW * 1.8, 56);
+          var flameAreaRight = torchX + Math.max(torchHeadW * 1.8, 56);
+          return y >= flameAreaTop && y <= flameAreaBottom &&
+                 x >= flameAreaLeft && x <= flameAreaRight;
+        }
+
+        // =====================================================
+        // PARTİKÜLLER
+        // =====================================================
+        var intensity = 0, smolder = 0, burstSmoke = 0, flameAcc = 0, emberAcc = 0, smokeAcc = 0;
+        var sprites = [], smokeSprite = null, sparkSprite = null, blueSprite = null;
+        var NOISE = [];
+        for (var ni = 0; ni < 256; ni++) NOISE.push(Math.random());
+        function noise1(x) {
+          var i = Math.floor(x), f = x - i, a = NOISE[i & 255], b = NOISE[(i + 1) & 255];
+          f = f * f * (3 - 2 * f);
+          return (a + (b - a) * f) * 2 - 1;
+        }
+        function wind(t) { return noise1(t * 1.3) * 0.7 + noise1(t * 3.1 + 40) * 0.3; }
+        function flickNow() { return 0.9 + 0.1 * noise1(flameTime * 9) + 0.05 * noise1(flameTime * 23 + 7); }
+        function baseYf() { return torchTopY + 4; }
+        function flameHf() { return (torchTopY - 6) * (0.88 + 0.12 * (noise1(flameTime * 1.7) * 0.5 + 0.5)); }
+
+        function makeSprite(r, g, b) {
+          var c = document.createElement("canvas"); c.width = c.height = 64;
+          var x = c.getContext("2d");
+          var gr = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+          gr.addColorStop(0, "rgba(" + r + "," + g + "," + b + ",1)");
+          gr.addColorStop(0.4, "rgba(" + r + "," + g + "," + b + ",0.5)");
+          gr.addColorStop(1, "rgba(" + r + "," + g + "," + b + ",0)");
+          x.fillStyle = gr; x.fillRect(0, 0, 64, 64);
+          return c;
+        }
+        var RAMP = [[0, 255, 220, 140], [0.22, 255, 170, 60], [0.5, 255, 110, 22], [0.8, 200, 50, 10], [1, 100, 22, 6]];
+        function rampColor(t) {
+          for (var i = 1; i < RAMP.length; i++) {
+            if (t <= RAMP[i][0]) {
+              var a = RAMP[i - 1], b = RAMP[i], k = (t - a[0]) / (b[0] - a[0]);
+              return [Math.round(a[1] + (b[1] - a[1]) * k), Math.round(a[2] + (b[2] - a[2]) * k), Math.round(a[3] + (b[3] - a[3]) * k)];
+            }
+          }
+          return [100, 22, 6];
+        }
+        function buildSprites() {
+          for (var i = 0; i < 24; i++) { var c = rampColor(i / 23); sprites.push(makeSprite(c[0], c[1], c[2])); }
+          smokeSprite = makeSprite(120, 112, 105);
+          sparkSprite = makeSprite(255, 200, 90);
+          blueSprite = makeSprite(90, 140, 255);
+        }
+
+        function spawnFlame() {
+          var U = torchHeadW;
+          var r1 = Math.random() + Math.random() + Math.random() - 1.5;
+          var x0 = clamp(r1 * Math.abs(r1) * U * 0.55, -U * 0.42, U * 0.42);
+          var heat = 1 - Math.abs(x0) / (U * 0.4);
+          flameParticles.push({
+            x0: x0, heat: heat, age: 0, life: rand(0.55, 0.95),
+            h: 0.4 + heat * 0.5 + Math.random() * 0.3,
+            lean: wind(flameTime) * U * 0.55,
+            ph: rand(0, 6.28), fr: rand(5, 10), amp: rand(0.05, 0.14) * U,
+            size: U * rand(0.16, 0.26) * (0.7 + 0.5 * heat)
+          });
+        }
+        function spawnEmber() {
+          var U = torchHeadW, Hf = flameHf();
+          emberParticles.push({
+            x: torchX + rand(-U * 0.2, U * 0.2), y: baseYf() - Hf * rand(0.1, 0.6),
+            vx: rand(-20, 20) + wind(flameTime) * 30, vy: -Hf * rand(0.5, 1.4),
+            age: 0, life: rand(1, 2.2), ph: rand(0, 6.28)
+          });
+        }
+        function spawnSmoke(fromTip) {
+          if (smokeParticles.length > 120) return;
+          var U = torchHeadW;
+          smokeParticles.push({
+            x: torchX + rand(-U * 0.15, U * 0.15),
+            y: fromTip ? baseYf() - flameHf() * 0.85 : baseYf(),
+            vx: rand(-8, 8), vy: -rand(30, 60), age: 0, life: rand(2, 3.5),
+            size: U * rand(0.12, 0.2), a: fromTip ? 0.07 : 0.17
+          });
+        }
+
+        function updateParticles(dt) {
+          var i, k = isLit ? 1 : 3.5;
+          for (i = flameParticles.length - 1; i >= 0; i--) {
+            var p = flameParticles[i]; p.age += dt / p.life * k;
+            if (p.age >= 1) flameParticles.splice(i, 1);
+          }
+          for (i = emberParticles.length - 1; i >= 0; i--) {
+            var e = emberParticles[i]; e.age += dt / e.life;
+            e.x += (e.vx + wind(flameTime + e.age * 2) * 25) * dt; e.y += e.vy * dt; e.vy *= 0.995;
+            if (e.age >= 1) emberParticles.splice(i, 1);
+          }
+          for (i = smokeParticles.length - 1; i >= 0; i--) {
+            var s = smokeParticles[i]; s.age += dt / s.life;
+            s.x += (s.vx + wind(flameTime * 0.8 + s.age * 3) * 25) * dt; s.y += s.vy * dt; s.vy *= 0.998;
+            if (s.age >= 1) smokeParticles.splice(i, 1);
+          }
+        }
+
+        // =====================================================
+        // ARKA PLAN (karanlık oda)
+        // =====================================================
+        function drawBackground() {
+          var bg = ctx.createRadialGradient(torchX, torchTopY, 40, torchX, torchTopY, Math.max(W, H) * 0.9);
+          bg.addColorStop(0, "#160c06");
+          bg.addColorStop(0.5, "#0a0604");
+          bg.addColorStop(1, "#030201");
+          ctx.fillStyle = bg;
+          ctx.fillRect(0, 0, W, H);
+
+          var g = ctx.createLinearGradient(0, torchBottomY - 20, 0, H);
+          g.addColorStop(0, "#0d0805");
+          g.addColorStop(1, "#050302");
+          ctx.fillStyle = g;
+          ctx.fillRect(0, torchBottomY - 20, W, H - torchBottomY + 20);
+
+          if (intensity > 0.01) {
+            ctx.globalAlpha = Math.min(1, intensity * flickNow());
+            var lightY = torchTopY + torchHeadH * 0.3;
+            var lightR = Math.max(W, H) * 0.6;
+            var light = ctx.createRadialGradient(torchX, lightY, 20, torchX, lightY, lightR);
+            light.addColorStop(0, "rgba(255, 160, 50, 0.35)");
+            light.addColorStop(0.35, "rgba(255, 120, 30, 0.15)");
+            light.addColorStop(1, "rgba(255, 80, 10, 0)");
+            ctx.fillStyle = light;
+            ctx.fillRect(0, 0, W, H);
+            ctx.globalAlpha = 1;
+          }
+        }
+
+        // =====================================================
+        // MEŞALE GÖVDESİ
+        // =====================================================
+        function drawTorch() {
+          var headBottom = torchTopY + torchHeadH;
+          var topY = headBottom - torchHeadH * 0.25;
+          var bottomY = torchBottomY;
+
+          var wTop = torchWTop;
+          var wBottom = torchWBottom;
+
+          // ---------- ALT KAİDE (demir ayak) ----------
+          var footH = torchWBottom * 0.35;
+          var footTopY = bottomY - footH;
+          var footGrad = ctx.createLinearGradient(torchX - torchFootW / 2, 0, torchX + torchFootW / 2, 0);
+          footGrad.addColorStop(0, "#0d0805");
+          footGrad.addColorStop(0.3, "#3a2a1a");
+          footGrad.addColorStop(0.5, "#6a5230");
+          footGrad.addColorStop(0.7, "#3a2a1a");
+          footGrad.addColorStop(1, "#0d0805");
+          ctx.fillStyle = footGrad;
+          ctx.beginPath();
+          ctx.moveTo(torchX - torchFootW / 2, bottomY);
+          ctx.quadraticCurveTo(torchX - torchFootW / 2 - 2, footTopY, torchX - wBottom / 2, footTopY);
+          ctx.lineTo(torchX + wBottom / 2, footTopY);
+          ctx.quadraticCurveTo(torchX + torchFootW / 2 + 2, footTopY, torchX + torchFootW / 2, bottomY);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = "rgba(180, 150, 90, 0.6)";
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(torchX - torchFootW / 2 + 2, footTopY + 1);
+          ctx.quadraticCurveTo(torchX, footTopY - 2, torchX + torchFootW / 2 - 2, footTopY + 1);
+          ctx.stroke();
+
+          // ---------- TRAPEZ GÖVDE ----------
+          var bodyGrad = ctx.createLinearGradient(torchX - wBottom / 2, 0, torchX + wBottom / 2, 0);
+          bodyGrad.addColorStop(0, "#1a0d05");
+          bodyGrad.addColorStop(0.2, "#3a2410");
+          bodyGrad.addColorStop(0.45, "#6b4423");
+          bodyGrad.addColorStop(0.55, "#7a5028");
+          bodyGrad.addColorStop(0.8, "#3a2410");
+          bodyGrad.addColorStop(1, "#1a0d05");
+          ctx.fillStyle = bodyGrad;
+          ctx.beginPath();
+          ctx.moveTo(torchX - wBottom / 2, footTopY);
+          ctx.lineTo(torchX - wTop / 2, topY);
+          ctx.lineTo(torchX + wTop / 2, topY);
+          ctx.lineTo(torchX + wBottom / 2, footTopY);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = "rgba(0,0,0,0.35)";
+          ctx.lineWidth = 0.8;
+          var grainCount = 7;
+          for (var i = 0; i < grainCount; i++) {
+            var t = i / (grainCount - 1);
+            var xTop = torchX - wTop / 2 + wTop * t;
+            var xBot = torchX - wBottom / 2 + wBottom * t;
+            ctx.beginPath();
+            ctx.moveTo(xTop, topY);
+            ctx.quadraticCurveTo((xTop + xBot) / 2 + Math.sin(i * 2) * 2, (topY + footTopY) / 2, xBot, footTopY);
+            ctx.stroke();
+          }
+
+          // ---------- METAL HALKALAR (bilezikler) ----------
+          var ring1Y = footTopY - (footTopY - topY) * 0.08;
+          var ring1W = wBottom * 0.96;
+          var r1 = ctx.createLinearGradient(torchX - ring1W / 2, 0, torchX + ring1W / 2, 0);
+          r1.addColorStop(0, "#1a1008");
+          r1.addColorStop(0.3, "#6a5230");
+          r1.addColorStop(0.5, "#b89a5a");
+          r1.addColorStop(0.7, "#6a5230");
+          r1.addColorStop(1, "#1a1008");
+          ctx.fillStyle = r1;
+          ctx.fillRect(torchX - ring1W / 2, ring1Y - 4, ring1W, 8);
+
+          var ring2Y = topY + (footTopY - topY) * 0.45;
+          var ring2W = (wTop + wBottom) / 2 * 0.98;
+          var r2 = ctx.createLinearGradient(torchX - ring2W / 2, 0, torchX + ring2W / 2, 0);
+          r2.addColorStop(0, "#1a1008");
+          r2.addColorStop(0.3, "#5a4828");
+          r2.addColorStop(0.5, "#9a7e48");
+          r2.addColorStop(0.7, "#5a4828");
+          r2.addColorStop(1, "#1a1008");
+          ctx.fillStyle = r2;
+          ctx.fillRect(torchX - ring2W / 2, ring2Y - 2.5, ring2W, 5);
+
+          var ring3Y = topY + (footTopY - topY) * 0.12;
+          var ring3W = wTop * 1.08;
+          var r3 = ctx.createLinearGradient(torchX - ring3W / 2, 0, torchX + ring3W / 2, 0);
+          r3.addColorStop(0, "#1a1008");
+          r3.addColorStop(0.3, "#5a4828");
+          r3.addColorStop(0.5, "#9a7e48");
+          r3.addColorStop(0.7, "#5a4828");
+          r3.addColorStop(1, "#1a1008");
+          ctx.fillStyle = r3;
+          ctx.fillRect(torchX - ring3W / 2, ring3Y - 2, ring3W, 4);
+
+          // ---------- BEZ BAŞLIK ----------
+          var headTop = torchTopY;
+          var hw = torchHeadW;
+          var neckW = wTop * 1.15;
+          var lipW = hw;
+
+          var headGrad = ctx.createLinearGradient(torchX - hw / 2, 0, torchX + hw / 2, 0);
+          headGrad.addColorStop(0, "#150a04");
+          headGrad.addColorStop(0.25, "#3a2410");
+          headGrad.addColorStop(0.45, "#5e3c1e");
+          headGrad.addColorStop(0.6, "#6e4824");
+          headGrad.addColorStop(0.8, "#3a2410");
+          headGrad.addColorStop(1, "#150a04");
+          ctx.fillStyle = headGrad;
+          ctx.beginPath();
+          ctx.moveTo(torchX - neckW / 2, topY + 2);
+          ctx.quadraticCurveTo(torchX - neckW / 2 - 4, headTop + torchHeadH * 0.5, torchX - lipW / 2, headTop + 6);
+          ctx.quadraticCurveTo(torchX, headTop - 4, torchX + lipW / 2, headTop + 6);
+          ctx.quadraticCurveTo(torchX + neckW / 2 + 4, headTop + torchHeadH * 0.5, torchX + neckW / 2, topY + 2);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = "rgba(0,0,0,0.5)";
+          ctx.lineWidth = 1.2;
+          var wrapCount = 9;
+          for (var k = 0; k < wrapCount; k++) {
+            var tK = k / wrapCount;
+            var yK = topY + (headTop + 6 - topY) * tK;
+            var wK = neckW + (lipW - neckW) * tK;
+            ctx.beginPath();
+            ctx.moveTo(torchX - wK / 2 + 2, yK);
+            ctx.lineTo(torchX + wK / 2 - 2, yK + 2);
+            ctx.stroke();
+          }
+
+          // ---------- ÜST KENAR ----------
+          if (intensity > 0.01) {
+            var emberGlow = ctx.createRadialGradient(torchX, headTop + 2, 2, torchX, headTop + 2, lipW * 0.8);
+            emberGlow.addColorStop(0, "rgba(255, 220, 120, 0.95)");
+            emberGlow.addColorStop(0.4, "rgba(255, 140, 40, 0.7)");
+            emberGlow.addColorStop(1, "rgba(180, 60, 10, 0)");
+            ctx.globalAlpha = Math.min(1, intensity);
+            ctx.fillStyle = emberGlow;
+            ctx.beginPath();
+            ctx.ellipse(torchX, headTop + 3, lipW * 0.55, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          } else {
+            ctx.fillStyle = "rgba(15, 8, 4, 0.95)";
+            ctx.beginPath();
+            ctx.ellipse(torchX, headTop + 3, lipW * 0.5, 6, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "rgba(255, 70, 15, " + (0.12 + 0.55 * smolder * (0.7 + 0.3 * noise1(flameTime * 12))) + ")";
+            ctx.beginPath();
+            ctx.ellipse(torchX, headTop + 2, lipW * 0.35, 3, 0, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // NOT: Kaidedeki isim yazısı kaldırıldı — sağ alt köşeye taşındı.
+        }
+
+        // =====================================================
+        // ALEV
+        // =====================================================
+        function drawSmoke() {
+          for (var i = 0; i < smokeParticles.length; i++) {
+            var s = smokeParticles[i];
+            var a = Math.min(1, s.age * 8) * (1 - s.age) * s.a;
+            if (a <= 0.003) continue;
+            var r = s.size * (1 + s.age * 3.2);
+            ctx.globalAlpha = a;
+            ctx.drawImage(smokeSprite, s.x - r, s.y - r, r * 2, r * 2);
+          }
+          ctx.globalAlpha = 1;
+        }
+
+        function drawFlame() {
+          if (intensity < 0.01) return;
+          var U = torchHeadW, baseY = baseYf(), Hf = flameHf();
+          var hs = 0.45 + 0.55 * intensity, fl = flickNow();
+          ctx.save();
+          ctx.globalCompositeOperation = "lighter";
+
+          var cy = baseY - Hf * 0.3, gr = Hf * 1.3;
+          var glow = ctx.createRadialGradient(torchX, cy, 2, torchX, cy, gr);
+          glow.addColorStop(0, "rgba(255,170,70," + (0.30 * fl * intensity) + ")");
+          glow.addColorStop(0.5, "rgba(255,110,30," + (0.10 * fl * intensity) + ")");
+          glow.addColorStop(1, "rgba(255,70,10,0)");
+          ctx.fillStyle = glow;
+          ctx.fillRect(torchX - gr, cy - gr, gr * 2, gr * 2);
+
+          ctx.globalAlpha = 0.26 * intensity;
+          ctx.drawImage(blueSprite, torchX - U * 0.55, baseY - U * 0.34, U * 1.1, U * 0.6);
+          ctx.globalAlpha = 0.16 * intensity;
+          ctx.drawImage(blueSprite, torchX - U * 0.35, baseY - U * 0.5, U * 0.7, U * 0.5);
+
+          for (var i = 0; i < flameParticles.length; i++) {
+            var p = flameParticles[i], t = p.age;
+            var x = torchX + p.x0 * (1 - 0.8 * t) + p.lean * Math.pow(t, 1.5) + Math.sin(p.ph + flameTime * p.fr) * p.amp * t;
+            var y = baseY - Hf * 0.72 * p.h * Math.pow(t, 0.85) * hs;
+            var r = p.size * (1 - 0.7 * t) * (0.6 + 0.4 * hs);
+            var ci = clamp(Math.round(clamp(t * (1.15 - 0.35 * p.heat), 0, 1) * 23), 0, 23);
+            ctx.globalAlpha = Math.min(1, t * 10) * Math.pow(1 - t, 1.2) * 0.20;
+            ctx.drawImage(sprites[ci], x - r, y - r * 1.8, r * 2, r * 3.6);
+          }
+          ctx.restore();
+          ctx.globalAlpha = 1;
+        }
+
+        function drawSparks() {
+          ctx.save();
+          ctx.globalCompositeOperation = "lighter";
+          var r = Math.max(1.5, torchHeadW * 0.03);
+          for (var i = 0; i < emberParticles.length; i++) {
+            var e = emberParticles[i];
+            ctx.globalAlpha = (1 - e.age) * (0.65 + 0.35 * Math.sin(e.ph + e.age * e.life * 30));
+            ctx.drawImage(sparkSprite, e.x - r * 2, e.y - r * 2, r * 4, r * 4);
+          }
+          ctx.restore();
+          ctx.globalAlpha = 1;
+        }
+
+        // =====================================================
+        // DÖNGÜ
+        // =====================================================
+        var frameCount = 0, lastMs = 0, accMs = 0;
+
+        function update(dt) {
+          flameTime += dt;
+          intensity += ((isLit ? 1 : 0) - intensity) * (1 - Math.exp(-dt * (isLit ? 3.2 : 10)));
+          if (!isLit && intensity < 0.002) intensity = 0;
+          flameAcc += 250 * intensity * dt;
+          while (flameAcc >= 1) { flameAcc--; spawnFlame(); }
+          var emberRate = 6 * intensity * (0.4 + 1.6 * Math.max(0, noise1(flameTime * 0.9 + 3.7)));
+          emberAcc += emberRate * dt;
+          while (emberAcc >= 1) { emberAcc--; spawnEmber(); if (Math.random() < 0.35) spawnEmber(); }
+          var sr;
+          if (isLit) sr = 3 * intensity + 2 * intensity * Math.max(0, noise1(flameTime * 0.6 + 9.1));
+          else { smolder = Math.max(0, smolder - dt / 3.5); burstSmoke = Math.max(0, burstSmoke - dt); sr = burstSmoke > 0 ? 70 : smolder * 14; }
+          smokeAcc += sr * dt;
+          while (smokeAcc >= 1) { smokeAcc--; spawnSmoke(isLit); }
+          updateParticles(dt);
+        }
+
+        function draw() {
+          drawBackground();
+          drawTorch();
+          drawSmoke();
+          drawFlame();
+          drawSparks();
+        }
+
+        function loop(now) {
+          requestAnimationFrame(loop);
+          var n = now || performance.now();
+          var dtMs = lastMs ? n - lastMs : STEP_MS;
+          lastMs = n;
+          accMs += Math.min(dtMs, 100);
+          var steps = 0;
+          while (accMs >= STEP_MS - 1 && steps < 5) {
+            accMs -= STEP_MS;
+            frameCount++;
+            update(STEP_MS / 1000);
+            steps++;
+          }
+          if (steps === 5) accMs = 0;
+          draw();
+        }
+
+        // =====================================================
+        // TIKLAMA / DOKUNMA
+        // =====================================================
+        function handleTap(x, y) {
+          if (isInFlameArea(x, y)) {
+            isLit = !isLit;
+            if (!isLit) {
+              smolder = 1; burstSmoke = 0.5;
+              stopFireSound(0.6);
+            } else {
+              smolder = 0;
+              for (var j = 0; j < 6; j++) spawnEmber();
+              playIgniteBurst();
+              startFireSound();
+            }
+          } else if (!isLit) {
+            isLit = true; smolder = 0;
+            for (var k2 = 0; k2 < 6; k2++) spawnEmber();
+            playIgniteBurst();
+            startFireSound();
+          }
+        }
+
+        function bindEvents() {
+          if (window.PointerEvent) {
+            canvas.addEventListener("pointerdown", function (e) {
+              e.preventDefault();
+              handleTap(e.clientX, e.clientY);
+            });
+          } else {
+            canvas.addEventListener("touchstart", function (e) {
+              e.preventDefault();
+              var t = e.changedTouches[0];
+              if (t) handleTap(t.clientX, t.clientY);
+            }, { passive: false });
+            canvas.addEventListener("mousedown", function (e) {
+              e.preventDefault();
+              handleTap(e.clientX, e.clientY);
+            });
+          }
+
+          document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+              // Sekmeden çıkınca söndür + sesi kes
+              isLit = false;
+              smolder = 1; burstSmoke = 0.5;
+              stopFireSound(0.2);
+              if (audioCtx && audioCtx.state === "running") {
+                audioCtx.suspend().catch(function () {});
+              }
+            } else {
+              // Geri dönünce sesi devam ettir (meşale hâlâ yanıyorsa)
+              if (isLit && soundEnabled) {
+                ensureAudio();
+                startFireSound();
+              }
+            }
+          });
+
+          window.addEventListener("pagehide", function () {
+            isLit = false;
+            stopFireSound(0.05);
+          });
+          window.addEventListener("beforeunload", function () {
+            isLit = false;
+            stopFireSound(0.05);
+          });
+
+          var resizeTimer = 0;
+          function scheduleResize() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+              if (window.innerWidth !== W || window.innerHeight !== H) resize();
+            }, 120);
+          }
+          window.addEventListener("resize", scheduleResize);
+          window.addEventListener("orientationchange", scheduleResize);
+        }
+
+        // =====================================================
+        // SES DÜĞMESİ (HTML)
+        // =====================================================
+        function bindSoundButton() {
+          var soundBtn = document.getElementById("soundBtn");
+          var soundOnIcon = document.getElementById("soundOnIcon");
+          var soundOffIcon = document.getElementById("soundOffIcon");
+
+          function updateSoundButton() {
+            if (soundEnabled) {
+              soundOnIcon.style.display = "";
+              soundOffIcon.style.display = "none";
+              soundBtn.setAttribute("aria-pressed", "true");
+            } else {
+              soundOnIcon.style.display = "none";
+              soundOffIcon.style.display = "";
+              soundBtn.setAttribute("aria-pressed", "false");
+            }
+          }
+
+          soundBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            soundEnabled = !soundEnabled;
+            updateSoundButton();
+
+            if (!soundEnabled) {
+              stopFireSound(0.25);
+              if (audioCtx && audioCtx.state === "running") {
+                audioCtx.suspend().catch(function () {});
+              }
+            } else {
+              if (isLit) {
+                ensureAudio();
+                startFireSound();
+              } else {
+                // Ses kapalıyken kullanıcı tekrar açtıysa AudioContext'i hazırla
+                ensureAudio();
+              }
+            }
+          });
+
+          soundBtn.addEventListener("pointerdown", function (e) {
+            e.stopPropagation();
+          });
+
+          updateSoundButton();
+        }
+
+        // =====================================================
+        // RESIZE
+        // =====================================================
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+          W = window.innerWidth;
+          H = window.innerHeight;
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          computeLayout();
+        }
+
+        // =====================================================
+        // BAŞLAT
+        // =====================================================
+        buildSprites();
+        resize();
+        bindEvents();
+        bindSoundButton();
+        loop(performance.now());
+      })();
+    </script>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          var reloading = false;
+          var hadController = !!navigator.serviceWorker.controller;
+          navigator.serviceWorker.addEventListener("controllerchange", function () {
+            if (!hadController) { hadController = true; return; }
+            if (reloading) return;
+            reloading = true;
+            location.reload();
+          });
+          navigator.serviceWorker.register("sw.js", { scope: "./" }).then(function (reg) {
+            reg.update();
+            document.addEventListener("visibilitychange", function () {
+              if (!document.hidden) reg.update();
+            });
+          }).catch(function () {});
+        });
+      }
+    </script>
+    <script>
+      // ---- Screen Wake Lock ----
+      (function () {
+        if (!("wakeLock" in navigator)) return;
+
+        var wakeLock = null;
+        var wantLock = true;
+        var retryTimer = 0;
+
+        function clearRetry() {
+          if (retryTimer) {
+            clearTimeout(retryTimer);
+            retryTimer = 0;
+          }
+        }
+
+        function requestLock() {
+          if (!wantLock) return;
+          if (document.visibilityState !== "visible") return;
+          if (document.hasFocus && !document.hasFocus()) return;
+          if (wakeLock && !wakeLock.released) return;
+
+          clearRetry();
+
+          navigator.wakeLock.request("screen").then(function (lock) {
+            wakeLock = lock;
+            lock.addEventListener("release", function () {
+              wakeLock = null;
+              if (wantLock && document.visibilityState === "visible") {
+                clearRetry();
+                retryTimer = setTimeout(requestLock, 300);
+              }
+            });
+          }).catch(function () {
+            wakeLock = null;
+            if (wantLock && document.visibilityState === "visible") {
+              clearRetry();
+              retryTimer = setTimeout(requestLock, 1000);
+            }
+          });
+        }
+
+        function releaseLock() {
+          wantLock = false;
+          clearRetry();
+          if (wakeLock && !wakeLock.released) {
+            wakeLock.release().catch(function () {});
+            wakeLock = null;
+          }
+        }
+
+        function onFirstInteraction() {
+          wantLock = true;
+          requestLock();
+          window.removeEventListener("pointerdown", onFirstInteraction, true);
+          window.removeEventListener("touchstart", onFirstInteraction, true);
+          window.removeEventListener("click", onFirstInteraction, true);
+          window.removeEventListener("keydown", onFirstInteraction, true);
+        }
+        window.addEventListener("pointerdown", onFirstInteraction, true);
+        window.addEventListener("touchstart", onFirstInteraction, true);
+        window.addEventListener("click", onFirstInteraction, true);
+        window.addEventListener("keydown", onFirstInteraction, true);
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "visible") {
+            wantLock = true;
+            requestLock();
+          } else {
+            clearRetry();
+            if (wakeLock && !wakeLock.released) {
+              wakeLock.release().catch(function () {});
+              wakeLock = null;
+            }
+          }
+        });
+
+        window.addEventListener("pagehide", releaseLock);
+        window.addEventListener("beforeunload", releaseLock);
+      })();
+    </script>
+  </body>
+</html>
